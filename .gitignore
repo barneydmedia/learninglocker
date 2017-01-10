@@ -1,3 +1,6 @@
+/node_modules
+/.idea
+/public/storage
 /bootstrap/compiled.php
 /vendor
 composer.phar
@@ -5,6 +8,9 @@ composer.phar
 Thumbs.db
 .phpintel
 .env.*.php
+Homestead.json
+Homestead.yaml
+.env
 
 /app/config/ht2
 /app/config/production

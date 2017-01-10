@@ -1,5 +1,4 @@
 echo "Refreshing LL files"
-php artisan optimize
 php artisan js-localization:refresh
 
 echo "Cleaning bower_components"
