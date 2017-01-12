@@ -20,7 +20,7 @@ App::singleton('oauth2', function() {
 
 Route::get('/', function(){
   if( Auth::check() ){
-    $site = \Site::first();
+    $site = Site::first();
 
 
     //if super admin, show site dashboard, otherwise show list of LRSs can access
@@ -31,7 +31,7 @@ Route::get('/', function(){
       return View::make('partials.lrs.list', array('lrs' => $lrs, 'list' => $lrs, 'site' => $site));
     }
   }else{
-    $site = \Site::first();
+    $site = Site::first();
     if( isset($site) ){
       return View::make('system.forms.login', array( 'site' => $site ));
     }else{
@@ -458,38 +458,4 @@ Route::post('oauth/access_token', function() {
   return $bridgedResponse;
 });
 
-App::error(function(Exception $exception) {
-  Log::error($exception);
-  $code = method_exists($exception, 'getStatusCode') ? $exception->getStatusCode() : 500;
-
-  if (Request::segment(1) == "data" || Request::segment(1) == "api") {
-    return Response::json([
-      'error' => true,
-      'success' => false,
-      'message' => method_exists($exception, 'getErrors') ? $exception->getErrors() : $exception->getMessage(),
-      'code' => $code,
-      'trace' => Config::get('app.debug') ? $exception->getTraceAsString() : trans('api.info.trace')
-    ], $code);
-  } else {
-    echo "Status: ".$code." Error: ".$exception->getMessage();
-  }
-});
-
-/*
-|------------------------------------------------------------------
-| For routes that don't exist
-|------------------------------------------------------------------
-*/
-Route::any('{catchall}', function() {
-  if ( Request::segment(1) == "data" || Request::segment(1) == "api" ) {
-    $error = array(
-      'error'     =>  true,
-      'message'   =>  $exception->getMessage(),
-      'code'      =>  $exception->getStatusCode()
-    );
-
-    return Response::json( $error, $exception->getStatusCode());
-  } else {
-    return Response::view( 'errors.missing', array( 'message'=>$exception->getMessage() ), 404);
-  }
-})->where('catchall', '.*');
+// Error/Missing handling moved to app/Exceptions/Handler.php

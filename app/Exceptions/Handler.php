@@ -44,6 +44,19 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        \Log::error($exception);
+        $code = method_exists($exception, 'getStatusCode') ? $exception->getStatusCode() : 500;
+
+        if ($request->is('data/*') || $request->is('api/*')) {
+            return response()->json([
+                'error' => true,
+                'success' => false,
+                'message' => method_exists($exception, 'getErrors') ? $exception->getErrors() : $exception->getMessage(),
+                'code' => $code,
+                'trace' => config('app.debug') ? $exception->getTraceAsString() : trans('api.info.trace')
+            ], $code);
+        }
+
         return parent::render($request, $exception);
     }
 
