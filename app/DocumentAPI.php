@@ -1,11 +1,11 @@
 <?php
-namespace App\Models;
+namespace App;
 /**
  * Used to handle an LRSs 3 document APIs.
  *
  **/
 
-use Jenssegers\Mongodb\Model as Eloquent;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Locker\Repository\Document\FileTypes;
 use Locker\Helpers\Helpers as Helpers;

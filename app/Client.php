@@ -1,7 +1,7 @@
 <?php
-namespace App\Models;
+namespace App;
 
-use Jenssegers\Mongodb\Model as Eloquent;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
 class Client extends Eloquent {
 

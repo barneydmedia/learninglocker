@@ -1,12 +1,12 @@
 <?php
-namespace App\Models;
+namespace App;
 /**
  * When an object is type Activity, that activity
  * gets stored individually so we can reference.
  **/
 
 
-use Jenssegers\Mongodb\Model as Eloquent;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
 class Activity extends Eloquent {
 

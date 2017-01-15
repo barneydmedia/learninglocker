@@ -20,7 +20,7 @@ App::singleton('oauth2', function() {
 
 Route::get('/', function(){
   if( Auth::check() ){
-    $site = Site::first();
+    $site = App\Site::first();
 
 
     //if super admin, show site dashboard, otherwise show list of LRSs can access
@@ -31,7 +31,7 @@ Route::get('/', function(){
       return View::make('partials.lrs.list', array('lrs' => $lrs, 'list' => $lrs, 'site' => $site));
     }
   }else{
-    $site = Site::first();
+    $site = App\Site::first();
     if( isset($site) ){
       return View::make('system.forms.login', array( 'site' => $site ));
     }else{
