@@ -228,13 +228,13 @@ Route::get('lrs/{lrs_id}/client/{id}/edit', array(
 ));
 
 Route::post('lrs/{id}/client/create', array(
-  'before' => ['auth', 'csrf'],
+  'before' => ['auth'],
   'uses' => 'ClientController@create',
   'as' => 'client.create'
 ));
 
 Route::put('lrs/{lrs_id}/client/{id}/update', array(
-  'before' => ['auth', 'csrf'],
+  'before' => ['auth'],
   'uses' => 'ClientController@update',
   'as' => 'client.update'
 ));
@@ -266,7 +266,6 @@ Route::get('lrs/{id}/reporting/typeahead/{segment}/{query}', array(
 Route::resource('users', 'UserController');
 Route::put('users/update/password/{id}', array(
   'as'     => 'users.password',
-  'before' => 'csrf',
   'uses'   => 'PasswordController@updatePassword'
 ));
 Route::put('users/update/role/{id}/{role}', array(
@@ -279,7 +278,6 @@ Route::get('users/{id}/add/password', array(
 ));
 Route::put('users/{id}/add/password', array(
   'as'     => 'users.addPassword',
-  'before' => 'csrf',
   'uses'   => 'PasswordController@addPassword'
 ));
 Route::get('users/{id}/reset/password', array(

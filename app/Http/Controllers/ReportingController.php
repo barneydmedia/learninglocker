@@ -50,9 +50,8 @@ class ReportingController extends \BaseController {
   public function __construct(LrsRepo $lrs, ReportRepo $report){
     $this->lrs = $lrs;
     $this->report = $report;
-    $this->beforeFilter('auth');
-    $this->beforeFilter('auth.lrs');
-    $this->beforeFilter('csrf', array('only' => array('update', 'store', 'destroy')));
+    $this->middleware('auth');
+    $this->middleware('auth.lrs');
   }
 
   private function getLrs($lrs_id) {

@@ -19,17 +19,14 @@ class LrsController extends BaseController {
     $this->statement = $statement;
 
     // Defines filters.
-    $this->beforeFilter('auth');
-    $this->beforeFilter('csrf', ['only' => [
-      'store', 'update', 'destroy', 'editCredentials', 'usersRemove', 'changeRole'
-    ]]);
-    $this->beforeFilter('auth.lrs', ['except' => ['index','create','store']]); //check user can access LRS.
-    $this->beforeFilter('edit.lrs', ['only' => [
+    $this->middleware('auth');
+    $this->middleware('auth.lrs', ['except' => ['index','create','store']]); //check user can access LRS.
+    $this->middleware('edit.lrs', ['only' => [
       'edit','update','endpoint',
       'users', 'usersRemove', 'inviteUsersForm',
       'changeRole', 'api', 'editCredentials'
     ]]); //check user can edit LRS.
-    $this->beforeFilter('create.lrs', ['only' => ['create','store']]); //Allowed to create an LRS?
+    $this->middleware('create.lrs', ['only' => ['create','store']]); //Allowed to create an LRS?
   }
 
   private function getLrs($lrs_id) {

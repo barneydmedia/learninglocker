@@ -14,9 +14,8 @@ class StatementController extends BaseController {
     $this->statement = $statement;
     $this->lrs = $lrs;
 
-    $this->beforeFilter('auth');
-    $this->beforeFilter('csrf', array('only' => 'store'));
-    $this->beforeFilter('@checkCanSubmit', array('only' => 'store'));
+    $this->middleware('auth');
+    $this->middleware('@checkCanSubmit', array('only' => 'store'));
   }
 
   /**

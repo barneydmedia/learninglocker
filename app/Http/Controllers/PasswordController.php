@@ -11,7 +11,7 @@ class PasswordController extends BaseController {
 
   public function __construct(User $user){
     $this->user = $user;
-    $this->beforeFilter('auth', array('only' => array('addPasswordForm', 'addPassword', 'updatePassword')));
+    $this->middleware('auth', array('only' => array('addPasswordForm', 'addPassword', 'updatePassword')));
   }
 
   public function remind(){
