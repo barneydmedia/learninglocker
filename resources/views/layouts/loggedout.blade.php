@@ -6,13 +6,13 @@
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-lg-offset-4 col-md-offset-3">
       
       <div class="logo">
-        <img src="{{ URL() }}/assets/img/logo2-grey.png" alt="Logo" />
+        <img src="/assets/img/logo2-grey.png" alt="Logo" />
       </div>
       <div class="wrapper">
 
         @if($errors->any())
           <ul class="alert alert-danger">
-            {{ implode('', $errors->all('<li>:message</li>'))}}
+            {!! implode('', $errors->all('<li>:message</li>'))!!}
           </ul>
         @endif
   
@@ -41,10 +41,10 @@
 
     <!-- required scripts -->
     @section('scripts')
-      {{ HTML::script('assets/js/libs/jquery/jquery.1.10.2.js') }}
-      {{ HTML::script('assets/js/libs/bootstrap/bootstrap.min.js') }}
-      {{ HTML::script('assets/js/respond.min.js') }}
-      {{ HTML::script('assets/js/placeholder.js') }}
+      {!! HTML::script('assets/js/libs/jquery/jquery.1.10.2.js') !!}
+      {!! HTML::script('assets/js/libs/bootstrap/bootstrap.min.js') !!}
+      {!! HTML::script('assets/js/respond.min.js') !!}
+      {!! HTML::script('assets/js/placeholder.js') !!}
     @show
 
   @show
