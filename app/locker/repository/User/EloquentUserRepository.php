@@ -1,6 +1,6 @@
 <?php namespace Locker\Repository\User;
 
-use User;
+use \App\User as User;
 
 class EloquentUserRepository implements UserRepository {
 
@@ -56,7 +56,7 @@ class EloquentUserRepository implements UserRepository {
 
     if( $email ){
       //verify email
-      \User::where('email', $email)->update(array('verified' => 'yes'));
+      User::where('email', $email)->update(array('verified' => 'yes'));
       $message_type = 'success';
       $message = \Lang::get('users.email_verified');
     }else{
@@ -90,10 +90,10 @@ class EloquentUserRepository implements UserRepository {
     $user = $this->find($id);
 
     //get a super admin user
-    $super   = \User::where('role', 'super')->first();
+    $super   = User::where('role', 'super')->first();
 
     //get all LRSs owned by user being deleted
-    $get_lrs = \Lrs::where('owner_id', $id)->get();
+    $get_lrs = \App\Lrs::where('owner_id', $id)->get();
     
     //do LRS exists?
     if( $get_lrs ){

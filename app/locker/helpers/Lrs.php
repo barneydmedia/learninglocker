@@ -9,7 +9,7 @@ class Lrs {
   **/
   public static function lrsCanCreate(){
 
-    $site = \Site::first();
+    $site = \App\Site::first();
 
     if( in_array(\Auth::user()->role, $site->create_lrs)){
       return true;
@@ -74,7 +74,7 @@ class Lrs {
    *
    **/
   public static function lrsOwner( $lrs_id ){
-    $lrs = \Lrs::find( $lrs_id );
+    $lrs = \App\Lrs::find( $lrs_id );
     if( $lrs->owner_id == \Auth::user()->_id || \Auth::user()->role == 'super' ){
       return true;
     }else{
@@ -92,7 +92,7 @@ class Lrs {
    *
    **/
   public static function isMember($lrs, $user){
-    $isMember = \Lrs::where('users._id', $user)->where('_id', $lrs)->first();
+    $isMember = \App\Lrs::where('users._id', $user)->where('_id', $lrs)->first();
     if( $isMember ){
       return true;
     }

@@ -142,6 +142,6 @@ class EloquentStorer extends EloquentReader implements Storer {
         $new_object = array('$set' => $new_object);
     }
 
-    return $collection->update($criteria, $new_object, ['multiple'=>true]);
+    return $collection->updateMany($criteria, $new_object);
   }
 }

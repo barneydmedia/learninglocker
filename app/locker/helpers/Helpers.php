@@ -169,7 +169,7 @@ class Helpers {
    * @return Model
    */
   static function getClient($username, $password) {
-    return (new \Client)
+    return (new \App\Client)
       ->where('api.basic_key', $username)
       ->where('api.basic_secret', $password)
       ->first();
@@ -183,7 +183,7 @@ class Helpers {
    */
   static function getLrsFromUserPass($username, $password) {
     $client = Helpers::getClient($username, $password);
-    $lrs = $client === null ? null : \Lrs::find($client->lrs_id);
+    $lrs = $client === null ? null : \App\Lrs::find($client->lrs_id);
 
     if ($lrs === null) {
       throw new Exceptions\Exception('Unauthorized request.', 401);
@@ -240,7 +240,7 @@ class Helpers {
 
   /**
    * Gets the current LRS from the Authorization header.
-   * @return \Lrs
+   * @return\App\Lrs
    */
   static function getLrsFromAuth() {
     list($username, $password) = Helpers::getUserPassFromAuth();

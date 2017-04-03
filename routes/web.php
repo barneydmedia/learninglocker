@@ -31,7 +31,7 @@ Route::get('/', function(){
       return View::make('partials.lrs.list', array('lrs' => $lrs, 'list' => $lrs, 'site' => $site));
     }
   }else{
-    $site = App\Site::first();
+    $site = \App\Site::first();
     if( isset($site) ){
       return View::make('system.forms.login', array( 'site' => $site ));
     }else{

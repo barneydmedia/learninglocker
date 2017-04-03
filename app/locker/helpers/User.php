@@ -73,7 +73,7 @@ class User {
         //was an LRS id passed? If so, add user to that LRS as an observer
         if( isset($data['lrs']) ){
 
-          $lrs = \Lrs::find( $data['lrs'] );
+          $lrs = \App\Lrs::find( $data['lrs'] );
 
           //is the user already a member of the LRS?
           $isMember = \Locker\Helpers\Lrs::isMember($lrs->_id, $user->_id);
@@ -109,7 +109,7 @@ class User {
           //do nothing as they are already in the system
         }else{
           //if adding to lrs, get lrs title, otherwise use the site name
-          $title = isset($lrs) ? $lrs->title . ' LRS' : \Site::first()->name . ' Learning Locker';
+          $title = isset($lrs) ? $lrs->title . ' LRS' : \App\Site::first()->name . ' Learning Locker';
           //set data to use in email
           $token = User::setEmailToken( $user, $user->email );
           $tokens[] = ['email' => $user->email, 'url' => \URL::to('email/invite', array($token))];

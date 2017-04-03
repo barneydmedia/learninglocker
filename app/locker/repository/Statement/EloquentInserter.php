@@ -102,8 +102,15 @@ class EloquentInserter extends EloquentReader implements Inserter {
    * @return [String => Mixed] $model
    */
   private function constructModel(\stdClass $statement, StoreOptions $opts) {
+    
+    // Dates must be passed into MongoDB as millisecond epoch strings
     $timestamp = new \Carbon\Carbon($statement->timestamp);
+    $timestamp = (string) $timestamp->timestamp . substr($timestamp->micro, 0, 3);
+    
+    // Dates must be passed into MongoDB as millisecond epoch strings
     $stored    = new \Carbon\Carbon($statement->stored);
+    $stored    = (string) $stored->timestamp . substr($stored->micro, 0, 3);
+    
     return [
       'lrs' => ['_id' => $opts->getOpt('lrs_id')], // Deprecated.
       'lrs_id' => $opts->getOpt('lrs_id'),
@@ -111,8 +118,9 @@ class EloquentInserter extends EloquentReader implements Inserter {
       'statement' => Helpers::replaceFullStop(json_decode(json_encode($statement), true)),
       'active' => false,
       'voided' => false,
-      'timestamp' => new \MongoDate($timestamp->timestamp, $timestamp->micro),
-      'stored'    => new \MongoDate($stored->timestamp, $stored->micro),    ];
+      'timestamp' => new \MongoDB\BSON\UTCDateTime($timestamp),
+      'stored'    => new \MongoDB\BSON\UTCDateTime($stored),
+    ];
   }
 
   /**

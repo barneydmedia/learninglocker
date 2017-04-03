@@ -1,15 +1,15 @@
 <?php namespace Locker\Repository\Site;
 
-use Site;
+use \App\Site as Site;
 
 class EloquentSiteRepository implements SiteRepository {
 
   public function all(){
-    return Site::get()->first();
+    return \App\Site::get()->first();
   }
 
   public function find($id){
-    return Site::find($id);
+    return \App\Site::find($id);
   }
 
   public function validate($data){

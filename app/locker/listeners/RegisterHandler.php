@@ -5,8 +5,8 @@ class RegisterHandler {
   public function handle($user){
   
     //if first user, create site object
-    if( \User::count() == 1){
-      $site            = new \Site;
+    if( \App\User::count() == 1){
+      $site            = new \App\Site;
       $site->name        = '';
       $site->description = '';
       $site->email       = $user->email;
@@ -26,7 +26,7 @@ class RegisterHandler {
 
   public function domain_check( $data ){
 
-    $site = \Site::first();
+    $site = \App\Site::first();
 
     //has a domain been set?
     if( $site ){

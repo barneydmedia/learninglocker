@@ -118,7 +118,7 @@ class EloquentRepository extends BaseRepository implements Repository {
 
   /**
    * Maps fields from statement keys (paths) to export keys.
-   * @param \Statement $statement
+   * @param  \App\Statement $statement
    * @param [String => String] $fields
    * @return [String => Mixed]
    */

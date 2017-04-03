@@ -37,7 +37,7 @@ class Filter extends BaseData {
     $results = array_slice($array, 0, 4);
 
     foreach( $results as $key => $value ){
-      $get_name = \Statement::where('context.contextActivities.grouping.id', $key)->first();
+      $get_name = \App\Statement::where('context.contextActivities.grouping.id', $key)->first();
       if( isset( $get_name['context']['contextActivities']['grouping']['definition']['name']['en-gb'] ) ){
         $return_results[] = array('name' => $get_name['context']['contextActivities']['grouping']['definition']['name']['en-gb'],
                       'count' => $value);

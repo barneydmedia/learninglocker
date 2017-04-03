@@ -21,7 +21,7 @@ class EloquentQueryRepository implements QueryRepository {
    * @return Illuminate\Database\Eloquent\Builder
    */
   public function where($lrsId, array $filters) {
-    $statements = \Statement::where(self::LRS_ID_KEY, $lrsId);
+    $statements = \App\Statement::where(self::LRS_ID_KEY, $lrsId);
 
     foreach ($filters as $filter) {
       switch ($filter[1]) {
@@ -234,7 +234,7 @@ class EloquentQueryRepository implements QueryRepository {
    * @return Statement query
    */
   public function selectStatementDocs( $lrs='', $filter, $raw=false, $sections=[] ){
-    $statements = \Statement::where('lrs_id', $lrs);
+    $statements = \App\Statement::where('lrs_id', $lrs);
 
     if( !empty($filter) ){
 

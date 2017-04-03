@@ -22,7 +22,7 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
   ];
 
   public function validate( $data ) {
-    return Validator::make($data, $this->rules);
+    return \Validator::make($data, $this->rules);
   }
 
   public function getAuthIdentifier() { return $this->getKey(); }

@@ -52,7 +52,7 @@ class StatementRefTest extends StatementsTestCase {
     }, isset($statement->refs) ? $statement->refs : []);
 
     // Checks $expected_referrers.
-    $referrers = (new \Statement)
+    $referrers = (new \App\Statement)
       ->select('statement.id')
       ->where('statement.object.id', '=', $uuid)
       ->where('statement.object.objectType', '=', 'StatementRef')

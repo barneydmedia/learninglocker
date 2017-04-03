@@ -63,7 +63,7 @@ class Statements extends Base {
 
     $data = $this->analytics->statements(
       $this->lrs->_id,
-      LockerRequest::getParams(),
+      \LockerRequest::getParams(),
       $section
     );
 
@@ -86,7 +86,7 @@ class Statements extends Base {
 
   private function createMongoDate($date) {
     $parsedDate = new Carbon($date);
-    if($parsedDate) return new \MongoDate($parsedDate->timestamp, $parsedDate->micro);
+    if($parsedDate) return new \MongoDB\BSON\UTCDateTime((string) $parsedDate->timestamp . substr($parsedDate->micro, 0, 3));
     else throw new Exceptions\Exception("`$date` is not a valid date.");
   }
 
@@ -105,7 +105,7 @@ class Statements extends Base {
   private function convertOid($value) {
     if(is_array($value)) {
       if(isset($value['$oid'])) 
-        return new \MongoId($value['$oid']);
+        return new   \MongoDB\BSON\ObjectID($value['$oid']);
       else
         return array_map([$this, __FUNCTION__], $value); // recursively apply this function to whole pipeline
     }

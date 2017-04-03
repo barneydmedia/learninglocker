@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 class AddScopesToClients extends Migration {
 
   public function up() {
-    (new \Client)->get()->each(function ($client) {
+    (new \App\Client)->get()->each(function ($client) {
       $client->scopes = isset($client->scopes) ? $client->scopes : ['all'];
       $client->save();
     });

@@ -7,7 +7,7 @@ class ConsistentForeignKeyNames extends Migration {
 	public function up() {
     $db = \DB::getMongoDB();
 
-    Lrs::get()->each(function (Lrs $lrs) use ($db) {
+    \App\Lrs::get()->each(function (Lrs $lrs) use ($db) {
       $convertToMongoId = function ($value) {
         return new \MongoDB\BSON\ObjectID($value);
       };
@@ -43,7 +43,7 @@ class ConsistentForeignKeyNames extends Migration {
   public function down() {
     $db = \DB::getMongoDB();
 
-    Lrs::get()->each(function (Lrs $lrs) use ($db) {
+    \App\Lrs::get()->each(function (Lrs $lrs) use ($db) {
       $convertToString = function ($value) {
         return (string) $value;
       };

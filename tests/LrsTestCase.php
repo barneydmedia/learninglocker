@@ -12,7 +12,7 @@ abstract class LrsTestCase extends InstanceTestCase {
   }
 
   protected function createLrs(\User $user) {
-    $model = new \Lrs([
+    $model = new \App\Lrs([
       'title' => 'Test',
       'owner_id' => $user->_id,
       'users' => [[
@@ -31,7 +31,7 @@ abstract class LrsTestCase extends InstanceTestCase {
   }
 
   protected function createLLClient(\Lrs $lrs) {
-    $model = new \Client([
+    $model = new \App\Client([
       'api' => [
         'basic_key' => $this->createRandomString(),
         'basic_secret' => $this->createRandomString()

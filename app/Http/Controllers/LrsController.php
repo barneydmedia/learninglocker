@@ -135,7 +135,7 @@ class LrsController extends BaseController {
     return View::make('partials.lrs.dashboard', array_merge($this->getLrs($lrs_id), [
       'stats' => $dashboard->getStats(),
       'dash_nav' => true,
-      'client' => (new \Client)->where('lrs_id', $lrs_id)->first()
+      'client' => (new \App\Client)->where('lrs_id', $lrs_id)->first()
     ]));
   }
 
@@ -189,7 +189,7 @@ class LrsController extends BaseController {
    * @return View
    */
   public function statements($lrs_id){
-    $site = \Site::first();
+    $site = \App\Site::first();
     $statements = (new StatementIndexer)->index(new IndexOptions([
       'lrs_id' => $lrs_id,
       'limit' => $this->statement->count([

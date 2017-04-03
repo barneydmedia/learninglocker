@@ -233,7 +233,7 @@ class EventServiceProvider extends ServiceProvider
 // */
 
 // Route::filter('registration.status', function( $route, $request ){
-//   $site = \Site::first();
+//   $site = \App\Site::first();
 //   if( $site ){
 //     if( $site->registration != 'Open' ) return Redirect::to('/');
 //   }

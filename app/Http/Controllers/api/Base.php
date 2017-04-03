@@ -8,8 +8,8 @@ use \Request as Request;
 use \Route as Route;
 use \DB as DB;
 use \Locker\Repository\Lrs\EloquentRepository as LrsRepository;
-use \Lrs as Lrs;
-use \Client as Client;
+use \App\Lrs as Lrs;
+use \App\Client as Client;
 use \Locker\Helpers\Helpers as Helpers;
 use \LucaDegasperi\OAuth2Server\Filters\OAuthFilter as OAuthFilter;
 

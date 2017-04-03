@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class StatementRefArray extends Migration {
 	public function up() {
-    Statement::chunk(1000, function($statements) {
+    \App\Statement::chunk(1000, function($statements) {
       foreach ($statements as $statement) {
         if (is_object($statement->refs) || (is_array($statement->refs) && isset($statement->refs['id']))) {
           $statement->refs = [$statement->refs];

@@ -4,10 +4,11 @@ use \Illuminate\Database\Eloquent\Model as Model;
 use \Locker\Repository\Base\EloquentRepository as BaseRepository;
 use \Locker\XApi\Authority as XApiAuthority;
 use \Locker\Helpers\Helpers as Helpers;
+use \App\OAuthApp;
 
 class EloquentRepository extends BaseRepository implements Repository {
 
-  protected $model = '\Client';
+  protected $model = '\App\Client';
   protected $defaults = [
     'authority' => [
       'name' => 'New Client',
@@ -94,11 +95,12 @@ class EloquentRepository extends BaseRepository implements Repository {
   public function store(array $data, array $opts) {
     $client = parent::store($data, $opts);
 
-    \DB::getMongoDB()->oauth_clients->insert([
-      'client_id' => $client->api['basic_key'],
-      'client_secret' => $client->api['basic_secret'],
-      'redirect_uri' => 'http://www.example.com/'
-    ]);
+    $entry = new \App\OAuthApp();
+    $entry->client_id = $client->api['basic_key'];
+    $entry->client_secret = $client->api['basic_secret'];
+    $entry->redirect_uri = 'http://www.example.com/';
+    $entry->save();
+    
 
     return $client;
   }
@@ -111,7 +113,7 @@ class EloquentRepository extends BaseRepository implements Repository {
    */
   public function destroy($id, array $opts) {
     $client = $this->show($id, $opts);
-    \DB::getMongoDB()->oauth_clients->remove([
+    \App\OAuthApp::remove([
       'client_id' => $client->api['basic_key']
     ]);
     if ($this->where($opts)->count() < 2) {

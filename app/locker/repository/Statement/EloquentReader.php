@@ -6,7 +6,7 @@ use \Locker\Helpers\Helpers as Helpers;
 use \Locker\Helpers\Exceptions as Exceptions;
 
 abstract class EloquentReader {
-  protected $model = '\Statement';
+  protected $model = '\App\Statement';
 
   /**
    * Constructs a query restricted by the given options.

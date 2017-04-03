@@ -29,8 +29,8 @@ class ClientController extends BaseController {
     $opts = ['user' => \Auth::user()];
     $lrs = $this->lrs->show($lrs_id, $opts);
     $lrs_list = $this->lrs->index($opts); 
-	  $clients = \Client::where('lrs_id', $lrs->id)->get();
-    return View::make('partials.client.manage', [
+	  $clients = \App\Client::where('lrs_id', $lrs->id)->get();
+    return \View::make('partials.client.manage', [
       'clients' => $clients,
       'lrs' => $lrs,
       'list' => $lrs_list
@@ -48,7 +48,7 @@ class ClientController extends BaseController {
     $lrs = $this->lrs->show($lrs_id, $opts);
     $lrs_list = $this->lrs->index($opts); 
 	  $client = $this->client->show($id, ['lrs_id' => $lrs_id]);
-	 	return View::make('partials.client.edit', [
+	 	return \View::make('partials.client.edit', [
       'client' => $client,
       'lrs' => $lrs,
       'list' => $lrs_list,
@@ -82,7 +82,7 @@ class ClientController extends BaseController {
       $message = trans('lrs.client.created_fail');
     }
     
-    return Redirect::back()->with($message_type, $message);
+    return \Redirect::back()->with($message_type, $message);
   }
 
   /**
@@ -92,7 +92,7 @@ class ClientController extends BaseController {
    * @return View
    */
   public function update($lrs_id, $id){
-    $data = Input::all();
+    $data = \Input::all();
     $data['scopes'] = array_values(isset($data['scopes']) ? $data['scopes'] : []);
     $authority = [
       'name' => $data['name'],
@@ -112,10 +112,10 @@ class ClientController extends BaseController {
     
     if ($this->client->update($id, $data, ['lrs_id' => $lrs_id])) {
       $redirect_url = '/lrs/'.$lrs_id.'/client/manage#'.$id;
-      return Redirect::to($redirect_url)->with('success', trans('lrs.client.updated'));
+      return \Redirect::to($redirect_url)->with('success', trans('lrs.client.updated'));
     }
 
-    return Redirect::back()
+    return \Redirect::back()
       ->withInput()
       ->withErrors(['Error']);
   }
@@ -135,6 +135,6 @@ class ClientController extends BaseController {
       $message = trans('lrs.client.delete_client_error');
     }
 	
-    return Redirect::back()->with($message_type, $message);
+    return \Redirect::back()->with($message_type, $message);
   }
 }

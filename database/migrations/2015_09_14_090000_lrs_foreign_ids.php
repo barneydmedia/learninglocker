@@ -9,11 +9,11 @@ class LrsForeignIds extends Migration
   {
     $db = \DB::getMongoDB();
     
-    Lrs::get()->each(function (Lrs $lrs) use($db)
+    \App\Lrs::get()->each(function (Lrs $lrs) use($db)
     {
       if( isset($lrs->users) ) $lrs->users = Helpers::convertIds($lrs->users);
       
-      $lrs->owner_id = new \MongoId($lrs->owner_id);
+      $lrs->owner_id = new \MongoDB\BSON\ObjectID($lrs->owner_id);
       $lrs->save();
       
       echo 'IDs for lrs collection "' . $lrs->title . '" converted to MongoIds.' . PHP_EOL;
@@ -24,7 +24,7 @@ class LrsForeignIds extends Migration
   {
     $db = \DB::getMongoDB();
     
-    Lrs::get()->each(function (Lrs $lrs) use($db)
+    \App\Lrs::get()->each(function (Lrs $lrs) use($db)
     {
       $users = $lrs->getAttribute('users');
       foreach ($users as &$user) {

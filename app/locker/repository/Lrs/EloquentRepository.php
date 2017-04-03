@@ -5,11 +5,11 @@ use \Locker\Repository\Base\EloquentRepository as BaseRepository;
 use \Locker\XApi\Helpers as XAPIHelpers;
 use \Locker\Helpers\Helpers as Helpers;
 use \Event as Event;
-use \Client as ClientModel;
-use \Statement as StatementModel;
+use \App\Client as ClientModel;
+use \App\Statement as StatementModel;
 
 class EloquentRepository extends BaseRepository implements Repository {
-  protected $model = '\Lrs';
+  protected $model = '\App\Lrs';
   protected $defaults = [
     'title' => 'New LRS',
     'description' => ''

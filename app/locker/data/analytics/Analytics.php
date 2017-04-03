@@ -191,13 +191,13 @@ class Analytics extends \app\locker\data\BaseData implements AnalyticsInterface 
   }
 
   /**
-   * Turn submitted date into MongoDate object
+   * Turn submitted date into\MongoDB\BSON\UTCDateTime object
    * @param String $date A string representation of the date.
-   * @return MongoDate object
+   * @return\MongoDB\BSON\UTCDateTime object
    **/
   private function setMongoDate($date) {
     $carbon = new \Carbon\Carbon($date);
-    return new \MongoDate($carbon->timestamp, $carbon->micro);
+    return new \MongoDB\BSON\UTCDateTime((string) $carbon->timestamp . substr($carbon->micro, 0, 3));
   }
 
   /**

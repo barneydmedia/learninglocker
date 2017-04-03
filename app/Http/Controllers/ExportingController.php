@@ -26,7 +26,7 @@ class ExportingController extends \BaseController {
       'lrs' => $lrs, 
       'list' => $lrs_list,
       'exporting_nav' => true,
-      'client' => (new \Client)->where('lrs_id', $lrs_id)->first()
+      'client' => (new \App\Client)->where('lrs_id', $lrs_id)->first()
     ]);
   }
 }
