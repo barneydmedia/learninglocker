@@ -1,1 +1,1 @@
-{{ HTML::script('js/charts.min.js') }}
+{!! Html::script('js/charts.min.js') !!}

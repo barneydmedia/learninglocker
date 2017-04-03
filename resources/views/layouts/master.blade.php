@@ -12,19 +12,19 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="token" content="{{ Session::token() }}">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      {{ HTML::style('assets/css/bootstrap.min.css')}}
-      {{ HTML::style('assets/css/font-awesome.min.css')}}
+      {!! Html::style('assets/css/bootstrap.min.css')!!}
+      {!! Html::style('assets/css/font-awesome.min.css')!!}
 
       @if(Auth::check())
-        {{ HTML::style('assets/css/morris.min.css')}}
-        {{ HTML::style('assets/css/dashboard_layout.css')}}
-        {{ HTML::style('assets/css/app.css')}}
+        {!! Html::style('assets/css/morris.min.css')!!}
+        {!! Html::style('assets/css/dashboard_layout.css')!!}
+        {!! Html::style('assets/css/app.css')!!}
       @else
-        {{ HTML::style('assets/css/walledgarden.css')}}
+        {!! Html::style('assets/css/walledgarden.css')!!}
       @endif
 
       <!--[if lt IE 9]>
-      <script src="{{ URL() }}vendors/html5shiv.js"></script>
+      <script src="vendors/html5shiv.js"></script>
       <![endif]-->
     @show
 
@@ -35,7 +35,7 @@
     @section('script_bootload')
     <script type="text/javascript">
     window.LL = window.LL || {
-      siteroot: "{{ url() }}"
+      siteroot: "{{ url('/') }}"
     };
     </script>
     @show
@@ -82,10 +82,10 @@
 
     <!-- required scripts -->
     @section('scripts')
-      {{ HTML::script('assets/js/libs/jquery/jquery.1.10.2.js') }}
-      {{ HTML::script('assets/js/libs/bootstrap/bootstrap.min.js') }}
-      {{ HTML::script('assets/js/respond.min.js') }}
-      {{ HTML::script('assets/js/placeholder.js') }}
+      {!! Html::script('assets/js/libs/jquery/jquery.1.10.2.js') !!}
+      {!! Html::script('assets/js/libs/bootstrap/bootstrap.min.js') !!}
+      {!! Html::script('assets/js/respond.min.js') !!}
+      {!! Html::script('assets/js/placeholder.js') !!}
       <script type="text/javascript">
       (function (window, document) {
         var copyables = [].slice.call(document.querySelectorAll('.copyable'));

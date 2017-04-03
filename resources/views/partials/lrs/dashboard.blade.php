@@ -9,7 +9,7 @@
     };
   </script>
   <!-- load in one page application with requirejs -->
-  <script data-main="{{ URL() }}/assets/js/lrs/config" src="{{ URL() }}/assets/js/libs/require/require.js"></script>
+  <script data-main="/assets/js/lrs/config" src="/assets/js/libs/require/require.js"></script>
 @stop
 
 @section('sidebar')
@@ -34,6 +34,6 @@
   @parent
  
   <script type='text/javascript'>
-    window.LL.stats = {{ json_encode( $stats ) }};
+    window.LL.stats = {!! json_encode( $stats ) !!};
   </script>
 @stop

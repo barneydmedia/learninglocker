@@ -9,8 +9,8 @@
       lang: '{{ $lang }}'
     };
   </script>
-  {{ HTML::style('assets/css/exports.css')}}
-  {{ HTML::style('assets/css/typeahead.css')}}
+  {!! Html::style('assets/css/exports.css')!!}
+  {!! Html::style('assets/css/typeahead.css')!!}
 @stop
 
 @section('sidebar')
@@ -45,5 +45,5 @@
 @stop
 @section('scripts')
   @parent
-  <script data-main="{{ URL() }}/assets/js/reports/config" src="{{ URL() }}/assets/js/libs/require/require.js"></script>
+  <script data-main="/assets/js/reports/config" src="/assets/js/libs/require/require.js"></script>
 @stop

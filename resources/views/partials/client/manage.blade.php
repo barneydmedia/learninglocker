@@ -6,7 +6,7 @@
 
 @section('head')
   @parent
-  {{ HTML::style('assets/css/exports.css')}}
+  {!! Html::style('assets/css/exports.css')!!}
 @stop
 
 @section('content')
@@ -16,7 +16,7 @@
   <div>
     <div class="alert alert-success clearfix">
       <div class="col-sm-10">
-        <b>{{ trans('lrs.endpoint.endpoint') }}:</b> <span class="break-words">{{ URL() }}/data/xAPI/</span>
+        <b>{{ trans('lrs.endpoint.endpoint') }}:</b> <span class="break-words">/data/xAPI/</span>
       </div>
     </div>
     <div>

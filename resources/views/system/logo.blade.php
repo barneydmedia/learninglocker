@@ -1,6 +1,6 @@
-<a class="navbar-brand" href="{{ URL() }}">
+<a class="navbar-brand" href="/">
   <?php
-    $site = \Site::first();
+    $site = \App\Site::first();
     if( isset($site->name) ){
       $site = $site->name;
     }else{

@@ -12,7 +12,7 @@
   
   <div class="page-header">
     @if( isset($admin_dash) )
-      <a href="{{ URL() }}/lrs/create" class="btn btn-primary pull-right"><i class="icon icon-plus"></i> {{ Lang::get('lrs.add') }}</a>
+      <a href="/lrs/create" class="btn btn-primary pull-right"><i class="icon icon-plus"></i> {{ Lang::get('lrs.add') }}</a>
     @endif
     <h1>{{ Lang::get('lrs.list') }}</h1>
   </div>

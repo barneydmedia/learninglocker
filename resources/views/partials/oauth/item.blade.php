@@ -1,6 +1,6 @@
 <div class="col-xs-12 col-sm-4 col-lg-4">
   <div class="app-list">
-    <h3><a href="{{ URL() }}/oauth/apps/{{ $app->_id }}"><i class="icon icon-cog"></i> {{ $app->name }}</a></h3>
+    <h3><a href="/oauth/apps/{{ $app->_id }}"><i class="icon icon-cog"></i> {{ $app->name }}</a></h3>
     <ul class="app-listing">
       <li>{{ $app->description }}</li>
       <li><b>App website:</b> <a href="{{ $app->website }}">{{ $app->website }}</a></li>

@@ -8,8 +8,8 @@
       secret: '{{ $client->api['basic_secret'] }}'
     };
   </script>
-  {{ HTML::style('assets/css/exports.css')}}
-  {{ HTML::style('assets/css/typeahead.css')}}
+  {!! Html::style('assets/css/exports.css')!!}
+  {!! Html::style('assets/css/typeahead.css')!!}
 @stop
 
 @section('sidebar')
@@ -24,5 +24,5 @@
 
   <div id="content"></div>
 
-  <script data-main="{{ URL() }}/assets/js/exports/config" src="{{ URL() }}/assets/js/libs/require/require.js"></script>
+  <script data-main="/assets/js/exports/config" src="/assets/js/libs/require/require.js"></script>
 @stop

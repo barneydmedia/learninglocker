@@ -1,4 +1,4 @@
-{{ HTML::script('js/easy.pie.chart.js') }}
+{!! Html::script('js/easy.pie.chart.js') !!}
 <script type="text/javascript">
 $(function() {
     $('.chart').easyPieChart({

@@ -1,4 +1,4 @@
-<?php $lang = \Site::first()->lang; ?>
+<?php $lang = \App\Site::first()->lang; ?>
 {{ Form::open(array('route' => 'statements.store', 'class' => 'form-horizontal')) }}
   <div class="bordered">
     <h4><i class="icon icon-check"></i> Learner (actor)</h4>
@@ -115,7 +115,6 @@
   <hr>
 
   <button type="submit" class="btn btn-primary">Generate</button>
-  <input type="hidden" name="_token" value="{{ csrf_token() }}" />
   <input type="hidden" name="lrs" value="{{ $lrs->_id }}" />
 </form>
      

@@ -210,7 +210,7 @@
     <h4>Language</h4>
     <div class="form-group">
       <div class="col-sm-4">
-        <?php $lang = \Site::first()->lang; ?>
+        <?php $lang = \App\Site::first()->lang; ?>
         {{ Form::text('language', $lang,array('class' => 'form-control', 'placeholder' => 'en-US')) }}
       </div>
     </div>
@@ -219,7 +219,6 @@
   <hr>
 
   <button type="submit" class="btn btn-primary">Generate</button>
-  <input type="hidden" name="_token" value="{{ csrf_token() }}" />
   <input type="hidden" name="lrs" value="{{ $lrs->_id }}" />
 </form>
      

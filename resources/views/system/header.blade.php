@@ -9,18 +9,18 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    {{ HTML::style('assets/css/bootstrap.min.css')}}
-    {{ HTML::style('assets/css/font-awesome.min.css')}}
+    {!! Html::style('assets/css/bootstrap.min.css')!!}
+    {!! Html::style('assets/css/font-awesome.min.css')!!}
 
     @if(Auth::check())
-      {{ HTML::style('assets/css/morris.min.css')}}
-      {{ HTML::style('assets/css/app.css')}}
+      {!! Html::style('assets/css/morris.min.css')!!}
+      {!! Html::style('assets/css/app.css')!!}
     @else
-      {{ HTML::style('assets/css/walledgarden.css')}}
+      {!! Html::style('assets/css/walledgarden.css')!!}
     @endif
 
     <!--[if lt IE 9]>
-    <script src="{{ URL() }}vendors/html5shiv.js"></script>
+    <script src="vendors/html5shiv.js"></script>
     <![endif]-->
   @show
   
