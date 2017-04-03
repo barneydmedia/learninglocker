@@ -16,7 +16,7 @@
   |
   | ** aggregate_on_native_dates **
   | Any aggregation querying on "statement.timestamp" or "statement.stored" will
-  | be automatically changed to query on the native MongoDate at the root of the document
+  | be automatically changed to query on the native \MongoDB\BSON\UTCDateTime at the root of the document
   */
   return [
     'disable_duplicate_key_checks' => false,
