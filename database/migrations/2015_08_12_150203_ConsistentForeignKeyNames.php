@@ -9,7 +9,7 @@ class ConsistentForeignKeyNames extends Migration {
 
     Lrs::get()->each(function (Lrs $lrs) use ($db) {
       $convertToMongoId = function ($value) {
-        return new \MongoId($value);
+        return new \MongoDB\BSON\ObjectID($value);
       };
       $this->changeForeignKey($db->statements, 'lrs._id', 'lrs_id', $lrs->_id, $convertToMongoId);
       $this->changeForeignKey($db->documentapi, 'lrs', 'lrs_id', $lrs->_id, $convertToMongoId);

@@ -122,7 +122,7 @@ class EloquentStorer extends EloquentReader implements Storer {
     $collection = $this->getCollection();
 
     $baseWheres = [
-      'lrs_id' => new \MongoId($opts->getOpt('lrs_id'))
+      'lrs_id' => new \MongoDB\BSON\ObjectID($opts->getOpt('lrs_id'))
     ];
 
     $scopes = $opts->getOpt('scopes');

@@ -20,7 +20,7 @@ class Analytics extends \app\locker\data\BaseData implements AnalyticsInterface 
    * @param String $key Name of the option.
    * @param Mixed $default Default value if option isn't defined. Defaults to null.
    * @param Callable $modifier A function to modify the option value if defined. Defaults to null.
-   * @return MongoDate
+   * @return\MongoDB\BSON\UTCDateTime
    */
   private function getOption(array $options, $key, $default = null, callable $modifier = null) {
     $modifier = $modifier !== null ? $modifier : function ($val) { return $val; };
@@ -32,7 +32,7 @@ class Analytics extends \app\locker\data\BaseData implements AnalyticsInterface 
    * @param [String => Mixed] $options
    * @param String $key Name of the option.
    * @param Mixed $default Default value if option isn't defined. Defaults to ''.
-   * @return MongoDate
+   * @return\MongoDB\BSON\UTCDateTime
    */
   private function getDateOption(array $options, $key, $default = '') {
     return $this->getOption($options, $key, $default, function ($val) {

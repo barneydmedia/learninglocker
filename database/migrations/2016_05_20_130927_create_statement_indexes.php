@@ -14,7 +14,7 @@ class CreateStatementIndexes extends Migration {
     $db = \DB::getMongoDB();
 
     $indexOptions = ['background'=>1, 'socketTimeoutMS'=>-1];
-    $statements = new MongoCollection($db, 'statements');
+    $statements = new MongoDB\Collection($db, 'statements');
 
     $statements->createIndex(['statement.id' => 1, 'lrs_id' => 1], $indexOptions);
     $statements->createIndex(['statement.actor.mbox' => 1], $indexOptions);

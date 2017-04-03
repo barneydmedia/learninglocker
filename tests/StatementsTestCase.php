@@ -39,9 +39,9 @@ abstract class StatementsTestCase extends LrsTestCase {
     ], $statement);
   }
 
-  protected function createStatement(\Lrs $lrs, \Client $client, array $statement) {
-    $model = new \Statement([
-      'lrs_id' => new \MongoId($lrs->_id),
+  protected function createStatement(\App\Lrs $lrs, \App\Client $client, array $statement) {
+    $model = new \App\Statement([
+      'lrs_id' => new   \MongoDB\BSON\ObjectID($lrs->_id),
       'client_id' => $client->_id,
       'statement' => $statement,
       'active' => true,
@@ -49,7 +49,7 @@ abstract class StatementsTestCase extends LrsTestCase {
       'refs' => []
     ]);
     $timestamp = new \Carbon\Carbon($model->statement['timestamp']);
-    $model->timestamp = new \MongoDate($timestamp->timestamp, $timestamp->micro);
+    $model->timestamp = new \MongoDB\BSON\UTCDateTime($timestamp->timestamp, $timestamp->micro);
     $model->save();
     return $model;
   }

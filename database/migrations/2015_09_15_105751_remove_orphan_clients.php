@@ -12,9 +12,10 @@ class RemoveOrphanClients extends Migration
    */
   public function up()
   {
-    $db = \DB::getMongoDB();
-    $clients = new MongoCollection($db, 'client');
-    $lrss = new MongoCollection($db, 'lrs');
+    $db = new MongoDB\Driver\Manager();
+    $eventManager = new MongoDB\Driver\EventManager();
+    $clients = new MongoDB\Collection($db, 'client', $eventManager);
+    $lrss = new MongoDB\Collection($db, 'lrs', $eventManager);
     
     $clientCursor = $clients->find([], ['lrs_id' => true]);
     

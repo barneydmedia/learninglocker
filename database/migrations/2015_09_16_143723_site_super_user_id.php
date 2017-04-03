@@ -12,7 +12,7 @@ class SiteSuperUserId extends Migration
   public function up()
   {
     $db = \DB::getMongoDB();
-    $sites = new MongoCollection($db, 'site');
+    $sites = new MongoDB\Collection($db, 'site');
     $sitesCursor = $sites->find([], ['super' => true]);
     
     foreach ($sitesCursor as $site) {
@@ -34,7 +34,7 @@ class SiteSuperUserId extends Migration
   public function down()
   {
     $db = \DB::getMongoDB();
-      $sites = new MongoCollection($db, 'site');
+      $sites = new MongoDB\Collection($db, 'site');
     $sitesCursor = $sites->find([], ['super' => true]);
     
     foreach ($sitesCursor as $site) {

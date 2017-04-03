@@ -19,7 +19,7 @@ abstract class InstanceTestCase extends TestCase {
       'registration' => 'Closed',
       'restrict' => 'None',
       'domain' => '',
-      'super' => [['user' => new \MongoId($user->_id)]]
+      'super' => [['user' => new   \MongoDB\BSON\ObjectID($user->_id)]]
     ]);
     $success = $model->save();
     return $model;

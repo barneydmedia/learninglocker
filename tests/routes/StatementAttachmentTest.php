@@ -82,8 +82,8 @@ class StatementAttachmentTest extends StatementsTestCase {
 
   public function testIndexAttachments() {
     $attachment = $this->storeAttachments();
-    $statement = (new \Statement)
-      ->where('lrs_id', new \MongoId($this->lrs->_id))
+    $statement = (new \App\Statement)
+      ->where('lrs_id', new \MongoDB\BSON\ObjectID($this->lrs->_id))
       ->where('statement.id', $this->statement_id)
       ->first()->statement;
 
@@ -125,8 +125,8 @@ class StatementAttachmentTest extends StatementsTestCase {
     parent::tearDown();
     $dir = Helpers::getEnvVar('FS_LOCAL_ENDPOINT').'/'.$this->lrs->_id;
     $this->deleteDirectory($dir);
-    (new \Statement)
-      ->where('lrs_id', new \MongoId($this->lrs->_id))
+    (new  \App\Statement)
+      ->where('lrs_id', new \MongoDB\BSON\ObjectID($this->lrs->_id))
       ->delete();
   }
 }

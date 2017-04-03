@@ -31,7 +31,7 @@ class AdminDashboard extends BaseDashboard {
    *
    **/
   public function lrsCount(){
-    return \DB::collection('lrs')->remember(5)->count();
+    return \DB::collection('lrs')->count();
   }
 
   /**
@@ -41,7 +41,7 @@ class AdminDashboard extends BaseDashboard {
    *
    **/
   public function userCount(){
-    return \DB::collection('users')->remember(5)->count();
+    return \DB::collection('users')->count();
   }
 
 }

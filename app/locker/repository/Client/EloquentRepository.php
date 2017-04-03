@@ -131,7 +131,7 @@ class EloquentRepository extends BaseRepository implements Repository {
    * @return Model
    */
   public function show($id, array $opts) {
-    $opts['lrs_id'] = new \MongoId($opts['lrs_id']);
+    $opts['lrs_id'] = new \MongoDB\BSON\ObjectID($opts['lrs_id']);
     return parent::show($id, $opts);
   }
 

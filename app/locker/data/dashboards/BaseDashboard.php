@@ -2,7 +2,7 @@
 
 use Locker\Repository\Lrs\EloquentRepository as LrsRepo;
 use Carbon\Carbon as Carbon;
-use MongoDate;
+use \MongoDB\BSON\UTCDateTime;
 
 abstract class BaseDashboard extends \app\locker\data\BaseData {
   protected $lrs_repo;
@@ -53,7 +53,7 @@ abstract class BaseDashboard extends \app\locker\data\BaseData {
     $firstStatement = \DB::collection('statements');
 
     if( $this->has_lrs ){
-      $firstStatement->where('lrs_id', new \MongoId($this->lrs));
+      $firstStatement->where('lrs_id', new   \MongoDB\BSON\ObjectID($this->lrs));
     }
       
     $firstStatement = $firstStatement->orderBy("timestamp")->first();
@@ -100,7 +100,7 @@ abstract class BaseDashboard extends \app\locker\data\BaseData {
   public function actorCount(){
     $base_match = [];
     if( $this->has_lrs ){
-      $base_match['lrs_id'] = new \MongoId($this->lrs);
+      $base_match['lrs_id'] = new   \MongoDB\BSON\ObjectID($this->lrs);
     }
 
     $count_array = ['mbox' => '', 'openid' => '', 'mbox_sha1sum' => '', 'account' => ''];
@@ -153,15 +153,15 @@ abstract class BaseDashboard extends \app\locker\data\BaseData {
 
         // Create the timestamp filter.
         $timestamp = [];
-        if ($startDate !== null) $timestamp['$gte'] = new MongoDate($startDate->timestamp, $startDate->micro);
-        if ($endDate !== null) $timestamp['$lte'] = new MongoDate($endDate->timestamp, $endDate->micro);
+        if ($startDate !== null) $timestamp['$gte'] = new \MongoDB\BSON\UTCDateTime($startDate->timestamp, $startDate->micro);
+        if ($endDate !== null) $timestamp['$lte'] = new \MongoDB\BSON\UTCDateTime($endDate->timestamp, $endDate->micro);
 
         $match = [
           'timestamp'=> $timestamp
         ];
 
         if( $this->has_lrs ){
-          $match['lrs_id'] = new \MongoId($this->lrs);
+          $match['lrs_id'] = new   \MongoDB\BSON\ObjectID($this->lrs);
         }
 
         $statements = $this->db->statements->aggregate(

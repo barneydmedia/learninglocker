@@ -15,7 +15,7 @@ class AddStoredToStatementRoot extends Migration {
 		set_time_limit(0);
 
 		$db = \DB::getMongoDB();
-    $statementsCollection = new MongoCollection($db, 'statements');
+    $statementsCollection = new MongoDB\Collection($db, 'statements');
     
     $statementsCollection->createIndex(['stored' => 1], ['background'=>1, 'socketTimeoutMS'=>-1]);
     $statementsCollection->createIndex(['stored' => -1], ['background'=>1, 'socketTimeoutMS'=>-1]);
@@ -30,7 +30,7 @@ class AddStoredToStatementRoot extends Migration {
     $maxBatchSize = 10000;
 
     while($statementsCursor->hasNext()) {
-	    $batch = new MongoUpdateBatch($statementsCollection);
+	    $batch = new \App\MongoUpdateBatch($statementsCollection);
 	    $batchSize = 0;
 
 	    while($batchSize < $maxBatchSize && $statementsCursor->hasNext()) {
@@ -40,20 +40,20 @@ class AddStoredToStatementRoot extends Migration {
 
 	    	$query = [
 				  'q' => ['_id' => $statement['_id']],
-				  'u' => ['$set' => ["stored" => new \MongoDate($statementStored->timestamp, $statementStored->micro)]],
+				  'u' => ['$set' => ["stored" => new \MongoDB\BSON\UTCDateTime($statementStored->timestamp, $statementStored->micro)]],
 				  'multi' => false,
 				  'upsert' => false,
 				];
 
 	    	if(isset($statement['refs'])) {
 	    		foreach ($statement['refs'] as $key => $refStatement) {
-	    			if(isset($refStatement['timestamp']) && !$refStatement['timestamp'] instanceof MongoDate) {
+	    			if(isset($refStatement['timestamp']) && !$refStatement['timestamp'] instanceof\MongoDB\BSON\UTCDateTime) {
               $timestamp = new Carbon\Carbon($refStatement['timestamp']);
-              $query['u']['$set']['refs.'.$key.'.timestamp'] = new \MongoDate($timestamp->timestamp, $timestamp->micro);
+              $query['u']['$set']['refs.'.$key.'.timestamp'] = new \MongoDB\BSON\UTCDateTime($timestamp->timestamp, $timestamp->micro);
             } 
-	    			if(isset($refStatement['stored']) && !$refStatement['stored'] instanceof MongoDate) {
+	    			if(isset($refStatement['stored']) && !$refStatement['stored'] instanceof\MongoDB\BSON\UTCDateTime) {
               $stored = new Carbon\Carbon($refStatement['stored']);
-              $query['u']['$set']['refs.'.$key.'.stored'] = new \MongoDate($stored->timestamp, $stored->micro);
+              $query['u']['$set']['refs.'.$key.'.stored'] = new \MongoDB\BSON\UTCDateTime($stored->timestamp, $stored->micro);
             }
 	    		}
 	    	}
@@ -75,7 +75,7 @@ class AddStoredToStatementRoot extends Migration {
 	public function down()
 	{
 		$db = \DB::getMongoDB();
-    $statementsCollection = new MongoCollection($db, 'statements');
+    $statementsCollection = new MongoDB\Collection($db, 'statements');
     
     $statementsCollection->deleteIndex('stored');
     $statementsCollection->deleteIndex(['lrs_id' => 1, 'stored' => -1]);
@@ -89,7 +89,7 @@ class AddStoredToStatementRoot extends Migration {
     $maxBatchSize = 10000;
 
     while($statementsCursor->hasNext()) {
-	    $batch = new MongoUpdateBatch($statementsCollection);
+	    $batch = new \App\MongoUpdateBatch($statementsCollection);
 	    $batchSize = 0;
 	    $shouldExecute = false;
 
@@ -105,10 +105,10 @@ class AddStoredToStatementRoot extends Migration {
 					  'upsert' => false,
 					];
 	    		foreach ($statement['refs'] as $key => $refStatement) {
-            if(isset($refStatement['timestamp']) && $refStatement['timestamp'] instanceof MongoDate ) {
+            if(isset($refStatement['timestamp']) && $refStatement['timestamp'] instanceof \MongoDB\BSON\UTCDateTime ) {
               $query['u']['$set']['refs.'.$key.'.timestamp'] = date('Y-m-d\TH:i:s.uP', $refStatement['timestamp']->sec);
             }
-            if(isset($refStatement['stored']) && $refStatement['stored'] instanceof MongoDate ) {
+            if(isset($refStatement['stored']) && $refStatement['stored'] instanceof \MongoDB\BSON\UTCDateTime ) {
               $query['u']['$set']['refs.'.$key.'.stored'] = date('Y-m-d\TH:i:s.uP', $refStatement['stored']->sec);
             }
 	    		}

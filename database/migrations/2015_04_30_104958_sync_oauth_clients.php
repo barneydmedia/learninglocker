@@ -6,8 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 class SyncOauthClients extends Migration {
 
 	public function up() {
-    $db = DB::getMongoDB()->oauth_clients;
     (new \Client)->get()->each(function ($client) use ($db) {
+    $db = \DB::getMongoDB()->oauth_clients;
       $db->insert([
         'client_id' => $client->api['basic_key'],
         'client_secret' => $client->api['basic_secret'],
@@ -26,7 +26,7 @@ class SyncOauthClients extends Migration {
   }
 
   public function down() {
-    DB::getMongoDB()->oauth_clients->remove([]);
+    \DB::getMongoDB()->oauth_clients->remove([]);
   }
 
 }

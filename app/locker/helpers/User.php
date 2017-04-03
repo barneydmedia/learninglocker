@@ -83,7 +83,7 @@ class User {
             $existing  = $lrs->users;
 
             array_push($existing, array(
-                          '_id' => new \MongoId($user->_id),
+                          '_id' => new \MongoDB\BSON\ObjectID($user->_id),
                           'email' => $user->email,
                           'role'  => 'observer' ));
             $lrs->users = $existing;

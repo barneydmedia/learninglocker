@@ -36,7 +36,7 @@ class Client extends Eloquent {
   }
 
   public function setLrsIdAttribute($value) {
-    $this->attributes['lrs_id'] = new \MongoId($value);
+    $this->attributes['lrs_id'] = new   \MongoDB\BSON\ObjectID($value);
   }
   
   /**
@@ -55,7 +55,7 @@ class Client extends Eloquent {
       list($value, $operator) = array($operator, '=');
     }
     if ($column == 'lrs_id') {
-        $value = new \MongoId($value);
+        $value = new   \MongoDB\BSON\ObjectID($value);
     }
     $instance = new static;
     $query = $instance->newQuery();

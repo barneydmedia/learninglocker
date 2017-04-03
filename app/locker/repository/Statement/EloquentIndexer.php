@@ -6,7 +6,7 @@ use \Locker\XApi\Helpers as XApiHelpers;
 use \Jenssegers\Mongodb\Eloquent\Builder as Builder;
 use \Illuminate\Database\Eloquent\Model as Model;
 use Carbon\Carbon as Carbon;
-use MongoDate;
+use \MongoDB\BSON\UTCDateTime;
 
 interface IndexerInterface {
   public function index(IndexOptions $opts);
@@ -48,7 +48,7 @@ class EloquentIndexer extends EloquentReader implements IndexerInterface {
         $op = '>';
         return $builder->where(function ($query) use ($key, $value, $op) {
           $date    = new Carbon($value);
-          $mongodate = new MongoDate($date->timestamp, $date->micro);
+          $mongodate = new \MongoDB\BSON\UTCDateTime($date->timestamp, $date->micro);
           return $query
             ->orWhere($key, $op, $mongodate)
             ->orWhere('refs.'.$key, $op, $mongodate);
@@ -59,7 +59,7 @@ class EloquentIndexer extends EloquentReader implements IndexerInterface {
         $op = '<=';
         return $builder->where(function ($query) use ($key, $value, $op) {
           $date    = new Carbon($value);
-          $mongodate = new MongoDate($date->timestamp, $date->micro);
+          $mongodate = new \MongoDB\BSON\UTCDateTime($date->timestamp, $date->micro);
           return $query
             ->orWhere($key, $op, $mongodate)
             ->orWhere('refs.'.$key, $op, $mongodate);

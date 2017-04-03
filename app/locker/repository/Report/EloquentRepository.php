@@ -86,8 +86,8 @@ class EloquentRepository extends BaseRepository implements Repository {
    * @param [type] $wheres [description]
    */
   public function setQuery($lrs_id, $query, $field, $wheres) {
-    return \Statement::select($field)
-      ->where('lrs_id', new \MongoId($lrs_id))
+    return \App\Statement::select($field)
+      ->where('lrs_id', new \MongoDB\BSON\ObjectID($lrs_id))
       ->where($wheres, 'like', '%'.$query.'%')
       ->distinct()
       ->get()

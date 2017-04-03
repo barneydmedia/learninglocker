@@ -33,7 +33,7 @@ class ClientForeignIds extends Migration
     // The Client model has a mutator that converts lrs_id from string to MongoId,
     // so the Mongo classes are used to directly modify the client collection.
     $db = \DB::getMongoDB();
-    $clients = new MongoCollection($db, 'client');
+    $clients = new MongoDB\Collection($db, 'client');
     
     $lrsIds = $clients->aggregateCursor([
       [
