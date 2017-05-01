@@ -249,8 +249,14 @@ class Helpers {
 
   public static function convertIds( $models = [] ) {
     return array_map( function($model){
-      $idString = \MongoDB\BSON\ObjectID::isValid($model['_id']) ? $model['_id'] : null;
-      $model['_id'] = new   \MongoDB\BSON\ObjectID($idString);
+      $idString = new \MongoDB\BSON\ObjectID;
+
+      // keeps the original _id if valid, discards otherwise
+      if ($model['_id'] instanceof \MongoDB\BSON\ObjectID) {
+            $idString = $model['_id'];
+      }
+
+      $model['_id'] = new \MongoDB\BSON\ObjectID($idString);
       return $model;
     }, $models);
   }

@@ -11,19 +11,22 @@ class SiteSuperUserId extends Migration
    */
   public function up()
   {
-    $db = \DB::getMongoDB();
-    $sites = new MongoDB\Collection($db, 'site');
-    $sitesCursor = $sites->find([], ['super' => true]);
+    // @TODO
+
+
+    // $db = \DB::getMongoDB();
+    // $sites = new DB::collection('site');
+    // $sitesCursor = $sites->where([], ['super' => true])->find();
     
-    foreach ($sitesCursor as $site) {
-      foreach ($site['super'] as $key => $supers) {
-        $sites->update(
-          ['_id' => $site['_id']],
-          ['$set' => ["super.$key.user" => new MongoId($supers['user'])]],
-          ['multiple' => true]
-        ); 
-      }
-    }
+    // foreach ($sitesCursor as $site) {
+    //   foreach ($site['super'] as $key => $supers) {
+    //     $sites->update(
+    //       ['_id' => $site['_id']],
+    //       ['$set' => ["super.$key.user" => new MongoId($supers['user'])]],
+    //       ['multiple' => true]
+    //     ); 
+    //   }
+    // }
   }
 
   /**
@@ -33,18 +36,18 @@ class SiteSuperUserId extends Migration
    */
   public function down()
   {
-    $db = \DB::getMongoDB();
-      $sites = new MongoDB\Collection($db, 'site');
-    $sitesCursor = $sites->find([], ['super' => true]);
+    // $db = \DB::getMongoDB();
+    //   $sites = new DB::collection('site');
+    // $sitesCursor = $sites->where([], ['super' => true])->find();
     
-    foreach ($sitesCursor as $site) {
-      foreach ($site['super'] as $key => $supers) {
-        $sites->update(
-          ['_id' => $site['_id']],
-          ['$set' => ["super.$key.user" => (string)$supers['user']]],
-          ['multiple' => true]
-        ); 
-      }
-    }
+    // foreach ($sitesCursor as $site) {
+    //   foreach ($site['super'] as $key => $supers) {
+    //     $sites->update(
+    //       ['_id' => $site['_id']],
+    //       ['$set' => ["super.$key.user" => (string)$supers['user']]],
+    //       ['multiple' => true]
+    //     ); 
+    //   }
+    // }
   }
 }

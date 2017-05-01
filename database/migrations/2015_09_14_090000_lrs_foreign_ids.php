@@ -9,7 +9,7 @@ class LrsForeignIds extends Migration
   {
     $db = \DB::getMongoDB();
     
-    \App\Lrs::get()->each(function (Lrs $lrs) use($db)
+    \App\Lrs::get()->each(function (\App\Lrs $lrs) use($db)
     {
       if( isset($lrs->users) ) $lrs->users = Helpers::convertIds($lrs->users);
       
@@ -24,7 +24,7 @@ class LrsForeignIds extends Migration
   {
     $db = \DB::getMongoDB();
     
-    \App\Lrs::get()->each(function (Lrs $lrs) use($db)
+    \App\Lrs::get()->each(function (\App\Lrs $lrs) use($db)
     {
       $users = $lrs->getAttribute('users');
       foreach ($users as &$user) {

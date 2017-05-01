@@ -12,12 +12,12 @@ class RemoveOrphanClients extends Migration
    */
   public function up()
   {
-    $db = new MongoDB\Driver\Manager();
-    $eventManager = new MongoDB\Driver\EventManager();
-    $clients = new MongoDB\Collection($db, 'client', $eventManager);
-    $lrss = new MongoDB\Collection($db, 'lrs', $eventManager);
+    $dbName = config('database.connections.mongodb.database');
+    $dbManager = new \MongoDB\Driver\Manager();
+    $clients = DB::collection('client');
+    $lrss = DB::collection('lrs');
     
-    $clientCursor = $clients->find([], ['lrs_id' => true]);
+    $clientCursor = $clients->where([], ['lrs_id' => true])->find();
     
     foreach ($clientCursor as $client) {
       $count = $lrss->count(['_id' => $client['lrs_id']]);

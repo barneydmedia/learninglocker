@@ -14,13 +14,15 @@ class AddStoredToStatementRoot extends Migration {
 	{
 		set_time_limit(0);
 
-		$db = \DB::getMongoDB();
-    $statementsCollection = new MongoDB\Collection($db, 'statements');
+    Schema::table('statements', function (Blueprint $table) {
+      $table->index(['stored' => 1], ['background'=>1, 'socketTimeoutMS'=>-1]);
+      $table->index(['stored' => -1], ['background'=>1, 'socketTimeoutMS'=>-1]);
+      $table->index(['lrs_id' => 1, 'stored' => 1], ['background'=>1, 'socketTimeoutMS'=>-1]);
+      $table->index(['lrs_id' => 1, 'stored' => -1], ['background'=>1, 'socketTimeoutMS'=>-1]);
+    });
     
-    $statementsCollection->createIndex(['stored' => 1], ['background'=>1, 'socketTimeoutMS'=>-1]);
-    $statementsCollection->createIndex(['stored' => -1], ['background'=>1, 'socketTimeoutMS'=>-1]);
-    $statementsCollection->createIndex(['lrs_id' => 1, 'stored' => 1], ['background'=>1, 'socketTimeoutMS'=>-1]);
-    $statementsCollection->createIndex(['lrs_id' => 1, 'stored' => -1], ['background'=>1, 'socketTimeoutMS'=>-1]);
+    $db = \DB::getMongoDB();
+    $statementsCollection = \DB::collection('statements');
 
     $statementsCursor = $statementsCollection->find();
 
@@ -75,7 +77,7 @@ class AddStoredToStatementRoot extends Migration {
 	public function down()
 	{
 		$db = \DB::getMongoDB();
-    $statementsCollection = new MongoDB\Collection($db, 'statements');
+    $statementsCollection = \DB::collection('statements');
     
     $statementsCollection->deleteIndex('stored');
     $statementsCollection->deleteIndex(['lrs_id' => 1, 'stored' => -1]);

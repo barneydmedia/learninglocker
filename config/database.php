@@ -76,12 +76,6 @@ return [
             'options' => [
                 'database' => 'learninglocker-db' // sets the authentication database required by mongo 3
             ],
-            // DB_CONNECTION=mongodb
-            // DB_HOST=127.0.0.1
-            // DB_PORT=27017
-            // DB_DATABASE=learninglocker-db
-            // DB_USERNAME=ll_user
-            // DB_PASSWORD=9676f4517adb4517
         ],
 
         'pgsql' => [

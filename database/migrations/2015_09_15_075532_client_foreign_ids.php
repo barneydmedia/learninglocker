@@ -13,7 +13,7 @@ class ClientForeignIds extends Migration
   {
     $db = \DB::getMongoDB();
     
-    \App\Client::get()->each(function (Client $client) use($db)
+    \App\Client::get()->each(function (\App\Client $client) use($db)
     {
       // The Client model has a mutator that converts lrs_id values to MongoId objects.
       $client->lrs_id = $client->lrs_id;
